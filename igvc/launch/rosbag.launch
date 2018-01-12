@@ -4,9 +4,9 @@
     excluding some of the duplicate image_transport topics.
     -->
 <launch>
-    <node pkg="igvc" type="system_stats" name="system_stats" output="screen">
+    <!-- <node pkg="igvc" type="system_stats" name="system_stats" output="screen">
         <param name="frequency" value="10"/>
-    </node>
+    </node> -->
 
     <node pkg="rosbag" type="record" name="record" output="screen"
     args="-a -x '(.*)image(.*)*'" />
