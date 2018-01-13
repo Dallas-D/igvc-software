@@ -103,7 +103,7 @@ void capPointCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int cap)
   }
 }
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr toPointCloud(tf::TransformListener& tf_listener,
+pcl::PointCloud<pcl::PointXYZ>::Ptr toPointCloud(tf::StampedTransform& transfrom,
                                                  std::vector<std::vector<cv::Point>> contours,
                                                  image_geometry::PinholeCameraModel cam, std::string topic)
 {
@@ -111,7 +111,6 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr toPointCloud(tf::TransformListener& tf_liste
   tf::StampedTransform transform;
   std::string topicCopy = topic;
   replace(topicCopy, "usb", "optical");
-  tf_listener.lookupTransform("/base_footprint", topicCopy, ros::Time(0), transform);
 
   for (std::vector<cv::Point> contour : contours)
   {

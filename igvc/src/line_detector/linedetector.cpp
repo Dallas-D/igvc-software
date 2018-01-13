@@ -101,7 +101,6 @@ void LineDetector::img_callback(const cv::Mat msg_img, const sensor_msgs::ImageC
   capPointCloud(cloud, maxDistance);
 
   _line_cloud.publish(cloud);
-
   cv::cvtColor(fin_img, fin_img, CV_GRAY2BGR);
   cv_bridge::CvImagePtr newPtr = cv_bridge::toCvCopy(origMsg, "");
   newPtr->image = fin_img;
