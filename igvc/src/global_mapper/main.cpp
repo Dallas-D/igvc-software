@@ -115,6 +115,22 @@ void icp_transform(pcl::PointCloud<pcl::PointXYZRGB>::Ptr input, const std::stri
     _pointcloud_size_pub.publish(size_msg);
   }
   firstFrame = false;
+  if (topic == "semantic_segmentation" && !input->points.empty())
+  {
+    octree->setInputCloud(global_map);
+    for (unsigned int i = 0; i < input->size(); ++i)
+    {
+      pcl::PointXYZRGB searchPoint(255, 0, 0);
+      searchPoint.x = input->points[i].x;
+      searchPoint.y = input->points[i].y;
+      searchPoint.z = input->points[i].z;
+
+      if (!octree->isVoxelOccupiedAtPoint(searchPoint))
+      {
+        octree->addPointToCloud(searchPoint, global_map);
+      }
+    }
+  }
 }
 
 void frame_callback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &msg, const std::string &topic)

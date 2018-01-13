@@ -55,7 +55,7 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   image_transport::ImageTransport it(nh);
 
-  image_transport::CameraSubscriber sub = it.subscribeCamera("usb_cam_center/filt_img", 1, info_img_callback);
+  image_transport::CameraSubscriber sub = it.subscribeCamera("semantic_segmentation", 1, info_img_callback);
   // TODO topic name below
   ros::Subscriber image_subscriber = nh.subscribe("/topic_name", 1, transform_callback);
   line_cloud_pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ>>("/linecloud", 1);
