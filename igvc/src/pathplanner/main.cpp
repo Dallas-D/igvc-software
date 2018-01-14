@@ -111,7 +111,7 @@ int main(int argc, char** argv)
   search_problem.Octree = boost::make_shared<pcl::octree::OctreePointCloudSearch<pcl::PointXYZ>>(0.1);
   search_problem.Octree->setInputCloud(search_problem.Map);
   search_problem.GoalThreshold = 1.0;
-  search_problem.Threshold = 0.5;
+  search_problem.Threshold = 0.6;
   search_problem.Speed = 1.0;
   search_problem.Baseline = baseline;
   search_problem.DeltaT = [](double distToStart, double distToGoal) -> double {

@@ -404,7 +404,7 @@
     <child link="body"/>
   </joint>
   <joint name="base_footprint_to_lidar" type="fixed">
-    <origin xyz="0.4572 0 0.9525" rpy="0 0 0" />
+    <origin xyz="0.27 0 0.9525" rpy="0 0 0" />
     <parent link="base_footprint"/>
     <child link="lidar"/>
   </joint>

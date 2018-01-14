@@ -5,11 +5,17 @@ pcl::PointXYZ PointFromPixel(const cv::Point& pixel, const tf::Transform& camera
                              image_geometry::PinholeCameraModel cam)
 {
   cv::Point3d cameraRay = cam.projectPixelTo3dRay(pixel);
+  //ROS_INFO_STREAM("transform = " << cameraFrameToWorldFrame.translation().x());
   tf::Point worldCameraOrigin = cameraFrameToWorldFrame * tf::Vector3(0, 0, 0);
+  ROS_INFO_STREAM("world = " << worldCameraOrigin.x() << " " << worldCameraOrigin.y() << " " << worldCameraOrigin.z());
   tf::Point worldCameraStep =
       cameraFrameToWorldFrame * tf::Vector3(cameraRay.x, cameraRay.y, cameraRay.z) - worldCameraOrigin;
+  ROS_INFO_STREAM("point X = " << pixel.x <<  " Y = " << pixel.y);
+  ROS_INFO_STREAM("ray x = " << cameraRay.x << "," << cameraRay.y << "," <<  cameraRay.z);
   double zScale = -worldCameraOrigin.z() / worldCameraStep.z();
+  ROS_INFO_STREAM("zScale = " << zScale);
   tf::Point ret = worldCameraOrigin + zScale * worldCameraStep;
+  ROS_INFO_STREAM(ret.x() << "," << ret.y());
   return pcl::PointXYZ(ret.x(), ret.y(), 0);
 }
 
